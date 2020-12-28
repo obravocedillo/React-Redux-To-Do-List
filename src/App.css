@@ -17,6 +17,17 @@
   margin-bottom: 0rem;
 }
 
+.p-toast {
+  position: fixed !important;
+  width: 90% !important;
+  margin-left: 5% !important;
+  margin-right: 5% !important;
+}
+
+.p-toast-top-right{
+  right: 0 !important;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

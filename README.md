@@ -1,6 +1,3 @@
-# Description
-To do list web application using React Redux Toolkit and Prime React CSS Framework, the application connects to a PHP and SQL back end
-
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

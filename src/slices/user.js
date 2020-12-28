@@ -23,10 +23,19 @@ export default userSlice.reducer
 export const login = (email, password) => dispatch => {
     return new Promise((resolve, reject) => {
         try {
-            fetch("http://localhost/dashboard/").then((result)=>{
-                console.log(result)
-                dispatch(loginSuccess({email}));
-                resolve("Success")
+            let formData = new FormData();
+            formData.append('email', email);
+            formData.append('password', password);
+            fetch("http://localhost/php/login.php",{method:'post',body:formData}).then((result)=>{
+                result.json().then(data=>{
+                    console.log(data)
+                    if(data.success === true){
+                        dispatch(loginSuccess({email}));
+                        resolve("Success")
+                    }else{
+                        reject("Error")
+                    }
+                })
             })
           } catch (e) {
             reject(e.message);
@@ -34,13 +43,24 @@ export const login = (email, password) => dispatch => {
     })
 }
 
-export const register = (name, email, password) => dispatch => {
+export const register = (nameRegister, emailRegister, passwordRegister) => dispatch => {
     return new Promise((resolve, reject) => {
         try {
-            fetch("http://localhost/dashboard/").then((result)=>{
+            let formData = new FormData();
+            formData.append('name', nameRegister);
+            formData.append('email', emailRegister);
+            formData.append('password', passwordRegister);
+            fetch("http://localhost/php/register.php",{method:'post',body:formData}).then((result)=>{
                 console.log(result)
-                dispatch(loginSuccess({email}));
-                resolve("Success")
+                result.json().then(data=>{
+                    console.log(data)
+                    if(data.success === true){
+                        dispatch(loginSuccess({emailRegister}));
+                        resolve("Success")
+                    }else{
+                        reject("Error")
+                    }
+                })
             })
           } catch (e) {
             reject(e.message);

@@ -6,6 +6,7 @@ import { Card } from 'primereact/card';
 import './Login.css';
 import { login, register } from '../slices/user';
 import { Toast } from 'primereact/toast';
+import { Password } from 'primereact/password';
 
 function Login(){
     const dispatch = useDispatch()
@@ -60,11 +61,10 @@ function Login(){
         }
        
     }
-    
 
     const validateLogin = (e) =>{
         let flag = true;
-        if(userEmailLogin.length <= 0 || !isEmail(userEmail)){
+        if(userEmailLogin.length <= 0){
             flag = false
         }
         if(userPasswordLogin.length <= 0){
@@ -114,7 +114,7 @@ function Login(){
                                     <span className="p-inputgroup-addon">
                                         <i className="pi pi-user"></i>
                                     </span>
-                                    <InputText placeholder="Password" value={userPasswordLogin} onChange={e => setUserPasswordLogin(e.target.value)}/>
+                                    <Password placeholder="Password" value={userPasswordLogin} onChange={e => setUserPasswordLogin(e.target.value)}/>
                                 </div>
     
                                 <div className="second-input">
@@ -154,13 +154,13 @@ function Login(){
                                     <span className="p-inputgroup-addon">
                                         <i className="pi pi-user"></i>
                                     </span>
-                                    <InputText placeholder="Password" value={userPassword} onChange={e => setUserPassword(e.target.value)}/>
+                                    <Password placeholder="Password" value={userPassword} onChange={e => setUserPassword(e.target.value)}/>
                                 </div>
                                 <div className="p-inputgroup second-input">
                                     <span className="p-inputgroup-addon">
                                         <i className="pi pi-user"></i>
                                     </span>
-                                    <InputText placeholder="Repeat password" value={userRepeatPassword} onChange={e => setUserRepeatPassword(e.target.value)}/>
+                                    <Password placeholder="Repeat password" value={userRepeatPassword} onChange={e => setUserRepeatPassword(e.target.value)}/>
                                 </div>
     
                                 <div className="second-input">
