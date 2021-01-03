@@ -11,7 +11,7 @@ function openmodal(user, data){
 
 function DoList(){
     const dispatch = useDispatch()
-    const { user } = useSelector((state) => state.user)
+    const { user } = useSelector((state) => state)
     const { data } = useSelector((state) => state.tasks)
     return (
         <div className="container">

@@ -9,11 +9,15 @@ const userSlice = createSlice({
     name: "user",
     initialState,
     reducers: {
-        loginSuccess: (state) => {
-            state.user = true;
+        loginSuccess: (state, action) => {
+            state.user = action.payload;
+            state.alreadyLoggedIn = true;
+            localStorage.setItem('ReduxToDoUser', JSON.stringify(action.payload));
         },
-        logoutSuccess: (state) => {
-            state.user = false;
+        logoutSuccess: (state, action) => {
+            state.user = null;
+            state.alreadyLoggedIn = false;
+            localStorage.remove('ReduxToDoUser');
         }
     }
 });
@@ -30,7 +34,8 @@ export const login = (email, password) => dispatch => {
                 result.json().then(data=>{
                     console.log(data)
                     if(data.success === true){
-                        dispatch(loginSuccess({email}));
+                        let tempData = data.data
+                        dispatch(loginSuccess(tempData));
                         resolve("Success")
                     }else{
                         reject("Error")
@@ -55,7 +60,8 @@ export const register = (nameRegister, emailRegister, passwordRegister) => dispa
                 result.json().then(data=>{
                     console.log(data)
                     if(data.success === true){
-                        dispatch(loginSuccess({emailRegister}));
+                        let tempData = data.data
+                        dispatch(loginSuccess(tempData));
                         resolve("Success")
                     }else{
                         reject("Error")

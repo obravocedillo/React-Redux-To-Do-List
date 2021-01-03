@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react'
+import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext'
@@ -9,8 +10,9 @@ import { Toast } from 'primereact/toast';
 import { Password } from 'primereact/password';
 
 function Login(){
+    const history = useHistory();
+
     const dispatch = useDispatch()
-    const { user } = useSelector(state => state.user)
     //Register information
     const [openedLogin, setOpenedLogin] = useState(true);
     const [userName, setUserName] = useState("");
@@ -36,6 +38,7 @@ function Login(){
         if(validateLogin()){
             dispatch(login(userEmailLogin,userPasswordLogin)).then((result)=>{
                 showToast('success','Success Message','The task was executed successfully.')
+                history.push("/Home");
                 console.log(result)
             },(reject)=>{
                 showToast('error','Error Message','Validation failed')
@@ -51,6 +54,7 @@ function Login(){
         if(validateRegister()){
             dispatch(register(userName,userEmail,userPassword)).then((result)=>{
                 showToast('success','Success Message','The task was executed successfully.')
+                history.push("/Home");
                 console.log(result)
             },(reject)=>{
                 showToast('error','Error Message','Validation failed')
